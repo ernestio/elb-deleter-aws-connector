@@ -20,15 +20,15 @@ import (
 
 var (
 	testEvent = Event{
-		UUID:                  "test",
-		BatchID:               "test",
-		ProviderType:          "aws",
-		DatacenterVPCID:       "vpc-0000000",
-		DatacenterRegion:      "eu-west-1",
-		DatacenterAccessKey:   "key",
-		DatacenterAccessToken: "token",
-		ELBName:               "test-elb",
-		ELBIsPrivate:          false,
+		UUID:             "test",
+		BatchID:          "test",
+		ProviderType:     "aws",
+		VPCID:            "vpc-0000000",
+		DatacenterRegion: "eu-west-1",
+		DatacenterSecret: "key",
+		DatacenterToken:  "token",
+		ELBName:          "test-elb",
+		ELBIsPrivate:     false,
 		ELBPorts: []Port{
 			Port{
 				FromPort: 80,
@@ -84,10 +84,10 @@ func TestEvent(t *testing.T) {
 					So(e.UUID, ShouldEqual, "test")
 					So(e.BatchID, ShouldEqual, "test")
 					So(e.ProviderType, ShouldEqual, "aws")
-					So(e.DatacenterVPCID, ShouldEqual, "vpc-0000000")
+					So(e.VPCID, ShouldEqual, "vpc-0000000")
 					So(e.DatacenterRegion, ShouldEqual, "eu-west-1")
-					So(e.DatacenterAccessKey, ShouldEqual, "key")
-					So(e.DatacenterAccessToken, ShouldEqual, "token")
+					So(e.DatacenterSecret, ShouldEqual, "key")
+					So(e.DatacenterToken, ShouldEqual, "token")
 					So(e.ELBName, ShouldEqual, "test-elb")
 					So(e.ELBIsPrivate, ShouldEqual, false)
 					So(len(e.ELBPorts), ShouldEqual, 1)
@@ -151,7 +151,7 @@ func TestEvent(t *testing.T) {
 
 		Convey("With no datacenter vpc id", func() {
 			testEventInvalid := testEvent
-			testEventInvalid.DatacenterVPCID = ""
+			testEventInvalid.VPCID = ""
 			invalid, _ := json.Marshal(testEventInvalid)
 
 			Convey("When validating the event", func() {
@@ -183,7 +183,7 @@ func TestEvent(t *testing.T) {
 
 		Convey("With no datacenter access key", func() {
 			testEventInvalid := testEvent
-			testEventInvalid.DatacenterAccessKey = ""
+			testEventInvalid.DatacenterSecret = ""
 			invalid, _ := json.Marshal(testEventInvalid)
 
 			Convey("When validating the event", func() {
@@ -199,7 +199,7 @@ func TestEvent(t *testing.T) {
 
 		Convey("With no datacenter access token", func() {
 			testEventInvalid := testEvent
-			testEventInvalid.DatacenterAccessToken = ""
+			testEventInvalid.DatacenterToken = ""
 			invalid, _ := json.Marshal(testEventInvalid)
 
 			Convey("When validating the event", func() {

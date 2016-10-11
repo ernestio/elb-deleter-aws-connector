@@ -59,7 +59,7 @@ func mapListeners(ev *Event) []*elb.Listener {
 }
 
 func deleteELB(ev *Event) error {
-	creds := credentials.NewStaticCredentials(ev.DatacenterAccessKey, ev.DatacenterAccessToken, "")
+	creds := credentials.NewStaticCredentials(ev.DatacenterSecret, ev.DatacenterToken, "")
 	svc := elb.New(session.New(), &aws.Config{
 		Region:      aws.String(ev.DatacenterRegion),
 		Credentials: creds,
