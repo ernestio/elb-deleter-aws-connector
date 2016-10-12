@@ -65,8 +65,8 @@ func deleteELB(ev *Event) error {
 func main() {
 	nc = ecc.NewConfig(os.Getenv("NATS_URI")).Nats()
 
-	fmt.Println("listening for elb.create.aws")
-	nc.Subscribe("elb.create.aws", eventHandler)
+	fmt.Println("listening for elb.delete.aws")
+	nc.Subscribe("elb.delete.aws", eventHandler)
 
 	runtime.Goexit()
 }
