@@ -42,22 +42,6 @@ func eventHandler(m *nats.Msg) {
 	e.Complete()
 }
 
-func mapListeners(ev *Event) []*elb.Listener {
-	var l []*elb.Listener
-
-	for _, port := range ev.ELBPorts {
-		l = append(l, &elb.Listener{
-			Protocol:         aws.String(port.Protocol),
-			LoadBalancerPort: aws.Int64(port.FromPort),
-			InstancePort:     aws.Int64(port.ToPort),
-			InstanceProtocol: aws.String(port.Protocol),
-			SSLCertificateId: aws.String(port.SSLCertID),
-		})
-	}
-
-	return l
-}
-
 func deleteELB(ev *Event) error {
 	creds := credentials.NewStaticCredentials(ev.DatacenterSecret, ev.DatacenterToken, "")
 	svc := elb.New(session.New(), &aws.Config{

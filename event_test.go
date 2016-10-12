@@ -29,8 +29,8 @@ var (
 		DatacenterToken:  "token",
 		ELBName:          "test-elb",
 		ELBIsPrivate:     false,
-		ELBPorts: []Port{
-			Port{
+		ELBListeners: []Listener{
+			Listener{
 				FromPort: 80,
 				ToPort:   80,
 				Protocol: "HTTP",
@@ -90,10 +90,10 @@ func TestEvent(t *testing.T) {
 					So(e.DatacenterToken, ShouldEqual, "token")
 					So(e.ELBName, ShouldEqual, "test-elb")
 					So(e.ELBIsPrivate, ShouldEqual, false)
-					So(len(e.ELBPorts), ShouldEqual, 1)
-					So(e.ELBPorts[0].FromPort, ShouldEqual, 80)
-					So(e.ELBPorts[0].ToPort, ShouldEqual, 80)
-					So(e.ELBPorts[0].Protocol, ShouldEqual, "HTTP")
+					So(len(e.ELBListeners), ShouldEqual, 1)
+					So(e.ELBListeners[0].FromPort, ShouldEqual, 80)
+					So(e.ELBListeners[0].ToPort, ShouldEqual, 80)
+					So(e.ELBListeners[0].Protocol, ShouldEqual, "HTTP")
 					So(len(e.NetworkAWSIDs), ShouldEqual, 1)
 					So(e.NetworkAWSIDs[0], ShouldEqual, "subnet-0000000")
 					So(len(e.InstanceAWSIDs), ShouldEqual, 1)

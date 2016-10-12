@@ -20,7 +20,7 @@ var (
 	ErrELBToPortInvalid             = errors.New("ELB to port invalid")
 )
 
-type Port struct {
+type Listener struct {
 	FromPort  int64  `json:"from_port"`
 	ToPort    int64  `json:"to_port"`
 	Protocol  string `json:"protocol"`
@@ -29,22 +29,22 @@ type Port struct {
 
 // Event stores the elb data
 type Event struct {
-	UUID                string   `json:"_uuid"`
-	BatchID             string   `json:"_batch_id"`
-	ProviderType        string   `json:"_type"`
-	DatacenterName      string   `json:"datacenter_name,omitempty"`
-	DatacenterRegion    string   `json:"datacenter_region"`
-	DatacenterToken     string   `json:"datacenter_token"`
-	DatacenterSecret    string   `json:"datacenter_secret"`
-	VPCID               string   `json:"vpc_id"`
-	ELBName             string   `json:"elb_name"`
-	ELBIsPrivate        bool     `json:"elb_is_private"`
-	ELBPorts            []Port   `json:"elb_ports"`
-	ELBDNSName          string   `json:"elb_dns_name"`
-	InstanceAWSIDs      []string `json:"instance_aws_ids"`
-	NetworkAWSIDs       []string `json:"network_aws_ids"`
-	SecurityGroupAWSIDs []string `json:"security_group_aws_ids"`
-	ErrorMessage        string   `json:"error,omitempty"`
+	UUID                string     `json:"_uuid"`
+	BatchID             string     `json:"_batch_id"`
+	ProviderType        string     `json:"_type"`
+	DatacenterName      string     `json:"datacenter_name,omitempty"`
+	DatacenterRegion    string     `json:"datacenter_region"`
+	DatacenterToken     string     `json:"datacenter_token"`
+	DatacenterSecret    string     `json:"datacenter_secret"`
+	VPCID               string     `json:"vpc_id"`
+	ELBName             string     `json:"name"`
+	ELBIsPrivate        bool       `json:"is_private"`
+	ELBListeners        []Listener `json:"listeners"`
+	ELBDNSName          string     `json:"dns_name"`
+	InstanceAWSIDs      []string   `json:"instance_aws_ids"`
+	NetworkAWSIDs       []string   `json:"network_aws_ids"`
+	SecurityGroupAWSIDs []string   `json:"security_group_aws_ids"`
+	ErrorMessage        string     `json:"error,omitempty"`
 }
 
 // Validate checks if all criteria are met
