@@ -41,8 +41,10 @@ type Event struct {
 	ELBIsPrivate        bool       `json:"is_private"`
 	ELBListeners        []Listener `json:"listeners"`
 	ELBDNSName          string     `json:"dns_name"`
+	InstanceNames       []string   `json:"instance_names"`
 	InstanceAWSIDs      []string   `json:"instance_aws_ids"`
 	NetworkAWSIDs       []string   `json:"network_aws_ids"`
+	SecurityGroups      []string   `json:"security_groups"`
 	SecurityGroupAWSIDs []string   `json:"security_group_aws_ids"`
 	ErrorMessage        string     `json:"error,omitempty"`
 }
